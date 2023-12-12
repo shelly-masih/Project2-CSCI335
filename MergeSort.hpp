@@ -1,5 +1,3 @@
-#ifndef MERGESORT_HPP
-#define MERGESORT_HPP
 
 #include <vector>
 #include <iostream>
@@ -37,6 +35,3 @@ class MergeSort {
           return median;
         }
 }; 
-
-
-#endif
