@@ -1,13 +1,11 @@
 
+
 #ifndef HALFSELECTIONSORT_HPP
 #define HALFSELECTIONSORT_HPP
 
 #include <vector>
 #include <iostream>
 #include <chrono>
-
-class HalfSelectionSort { 
-    public:
 int halfSelectionSort(std::vector<int> &nums,
                                          int &duration) {
 
@@ -54,7 +52,3 @@ int halfSelectionSort(std::vector<int> &nums,
 
   return median;
 }
-}; 
-
-
-#endif
