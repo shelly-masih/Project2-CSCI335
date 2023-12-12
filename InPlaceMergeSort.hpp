@@ -41,4 +41,3 @@ void inPlaceMergeSortHelper(std::vector<int>::iterator begin, std::vector<int>::
 
   std::inplace_merge(begin, midpoint, end);
 }
-};
