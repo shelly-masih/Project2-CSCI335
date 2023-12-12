@@ -4,25 +4,6 @@
 #include <algorithm>
 #include <chrono>
 
-
-int inPlaceMergeSort(std::vector<int>& nums, int& duration){
-  auto begin = nums.begin();
-  auto end = nums.end();
-
-  inPlaceMergeSortHelper(begin, end, duration);
-
-  int size = nums.size();
-  int median;
-  if (size % 2 == 0) { // checks if vector is even
-    median = (nums[size / 2 - 1] + nums[size / 2]) / 2;
-  } else { // if vector is odd
-    median = nums[size / 2];
-  }
-
-  // Return a meaningful result (in this case, the median)
-  return median;
-}
-
 void inPlaceMergeSortHelper(std::vector<int>::iterator begin, std::vector<int>::iterator end, int &duration){
   auto start = std::chrono::steady_clock::now();
 
@@ -41,3 +22,22 @@ void inPlaceMergeSortHelper(std::vector<int>::iterator begin, std::vector<int>::
 
   std::inplace_merge(begin, midpoint, end);
 }
+
+int inPlaceMergeSort(std::vector<int>& nums, int& duration){
+  auto begin = nums.begin();
+  auto end = nums.end();
+
+  inPlaceMergeSortHelper(begin, end, duration);
+
+  int size = nums.size();
+  int median;
+  if (size % 2 == 0) { // checks if vector is even
+    median = (nums[size / 2 - 1] + nums[size / 2]) / 2;
+  } else { // if vector is odd
+    median = nums[size / 2];
+  }
+
+  return median;
+}
+
+
