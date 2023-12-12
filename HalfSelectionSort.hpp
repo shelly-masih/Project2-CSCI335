@@ -1,8 +1,3 @@
-
-
-#ifndef HALFSELECTIONSORT_HPP
-#define HALFSELECTIONSORT_HPP
-
 #include <vector>
 #include <iostream>
 #include <chrono>
