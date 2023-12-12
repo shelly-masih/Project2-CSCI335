@@ -1,11 +1,8 @@
-#ifndef STANDARDSORT_HPP
-#define STANDARDSORT_HPP
 
 #include <vector>
 #include <iostream>
 
-class StandardSort { 
-    public:
+
         int standardSort(std::vector<int>& nums, int& duration){
           auto start = std::chrono::steady_clock::now(); // start the clock
           std::sort(nums.begin(), nums.end());           // sort the vector
@@ -23,6 +20,3 @@ class StandardSort {
 
           return median;
         }
-
-}; 
-#endif
