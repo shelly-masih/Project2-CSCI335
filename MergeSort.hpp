@@ -1,6 +1,7 @@
 
 #include <vector>
 #include <iostream>
+#include <chrono>
 
 int mergeSort(std::vector<int>& nums, int& duration){
   auto start = std::chrono::steady_clock::now();
