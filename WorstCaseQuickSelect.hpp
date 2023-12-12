@@ -1,6 +1,3 @@
-#ifndef WORSTCASEQUICKSELECT_HPP
-#define WORSTCASEQUICKSELECT_HPP
-
 #include <vector>
 
   std::vector<int> worstCaseQuickSelect (void){const int size = 20000;
@@ -13,4 +10,5 @@
                                               std::random_shuffle(worstCaseVector.begin(), worstCaseVector.end());
                                               return worstCaseVector;}
 
-#endif
+
+
