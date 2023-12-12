@@ -1,10 +1,7 @@
-#ifndef QUICKSELECT_HPP
-#define QUICKSELECT_HPP
 
 #include <vector>
 
 class QuickSelect {
-public:
   int quickSelect(std::vector<int> &nums, int &duration){
     // Record the start time
     auto start = std::chrono::steady_clock::now();
@@ -47,8 +44,6 @@ public:
 
     return median;
   }
-
-private:
   std::vector<int>::iterator hoarePartition(std::vector<int> &nums,
                                             std::vector<int>::iterator low,
                                             std::vector<int>::iterator high){
@@ -94,9 +89,3 @@ private:
     }
   }
 };
-
-#endif
-
-
-
-
