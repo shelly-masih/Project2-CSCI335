@@ -1,5 +1,3 @@
-#ifndef INPLACEMERGESORT_HPP
-#define INPLACEMERGESORT_HPP
 
 #include <vector>
 #include <iostream>
@@ -45,5 +43,3 @@ class InPlaceMergeSort {
           std::inplace_merge(begin, midpoint, end);
         }
 };
-
-#endif
