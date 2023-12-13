@@ -1,51 +1,58 @@
-// HalfHeapSort.hpp
-
 #include <vector>
-
-#include "HalfHeapSort.hpp"
 #include <algorithm>
 #include <chrono>
 
-inline int leftChild(int i) { return 2 * i + 1; }
+inline std::vector<int>::size_type leftChild(std::vector<int>::size_type i) {
+    return 2 * i + 1;
+}
 
-void percDown(std::vector<int> &heap, int i, int n) {
-  int child;
-  int tmp;
+void percDown(std::vector<int> &heap, std::vector<int>::size_type hole) {
+    std::vector<int>::size_type child;
+    int tmp = std::move(heap[hole]);
 
-  for (tmp = std::move(heap[i]); leftChild(i) < n; i = child) {
-    child = leftChild(i);
-    if (child != n - 1 && heap[child] < heap[child + 1])
-      ++child;
-    if (tmp < heap[child])
-      heap[i] = std::move(heap[child]);
-    else
-      break;
-  }
-  heap[i] = std::move(tmp);
+    for (; leftChild(hole) < heap.size(); hole = child) {
+        child = leftChild(hole);
+        if (child != heap.size() - 1 && heap[child] < heap[child + 1]) {
+            ++child;
+        }
+        if (tmp < heap[child]) {
+            heap[hole] = std::move(heap[child]);
+        } else {
+            break;
+        }
+    }
+    heap[hole] = std::move(tmp);
+}
+
+void buildHeap(std::vector<int> &heap) {
+    for (std::vector<int>::size_type i = heap.size() / 2 - 1; i != static_cast<std::vector<int>::size_type>(-1); --i) {
+        percDown(heap, i);
+    }
 }
 
 int halfHeapSort(std::vector<int> &nums, int &duration) {
-  auto start = std::chrono::steady_clock::now();
-  int median;
+    auto start = std::chrono::steady_clock::now();
 
-  for (int i = nums.size() / 2 - 1; i >= 0; --i)
-    percDown(nums, i, nums.size());
-  for (int j = nums.size() / 2 - 1; j > 0; --j) {
-    std::swap(nums[0], nums[j]);
-    percDown(nums, 0, j);
-  }
+    // Build heap
+    buildHeap(nums);
 
-  if (nums.size() % 2 == 0) { // checks if vector is even
-    median = (nums[nums.size() / 2 - 1] + nums[nums.size() / 2]) / 2;
-  } else { // if vector is odd
-    median = nums[nums.size() / 2];
-  }
+    // Remove n/2 elements from the heap
+    for (std::vector<int>::size_type j = 0; j < nums.size() / 2; ++j) {
+        // Move the first element to the end of the vector
+        std::swap(nums[0], nums[nums.size() - 1 - j]);
 
-  auto end = std::chrono::steady_clock::now();
-  duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
-                 .count();
+        // Perform percDown to restore the heap property
+        percDown(nums, 0);
+    }
 
-  return median;
+    // Median is now at the root of the remaining heap
+    int median = nums[0];
+
+    // Resize the vector
+    nums.resize(nums.size() / 2);
+
+    auto end = std::chrono::steady_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+
+    return median;
 }
-
-
