@@ -28,7 +28,7 @@ int inPlaceMergeSort(std::vector<int>& nums, int& duration){
 
   inPlaceMergeSortHelper(begin, end, duration);
 
-  int size = nums.size();
+  int size = nums.size() / 2;
   int median;
   if (size % 2 == 0) { // checks if vector is even
     median = (nums[size / 2 - 1] + nums[size / 2]) / 2;
