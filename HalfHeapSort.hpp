@@ -25,7 +25,8 @@ void percDown(std::vector<int> &heap, std::vector<int>::size_type hole) {
 }
 
 void buildHeap(std::vector<int> &heap) {
-    for (std::vector<int>::size_type i = heap.size() / 2 - 1; i != static_cast<std::vector<int>::size_type>(-1); --i) {
+    // Start from the last non-leaf node and perform percDown
+    for (std::vector<int>::size_type i = heap.size() / 2; i != static_cast<std::vector<int>::size_type>(-1); --i) {
         percDown(heap, i);
     }
 }
