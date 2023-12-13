@@ -1,10 +1,8 @@
 #include <vector>
 #include <iostream>
 #include <chrono>
-int halfSelectionSort(std::vector<int> &nums,
-                                         int &duration) {
 
-  auto start = std::chrono::steady_clock::now();
+int halfSelectionSort(std::vector<int> &nums, int &duration) {
   int size = nums.size();
   int median;
 
@@ -20,7 +18,7 @@ int halfSelectionSort(std::vector<int> &nums,
     duration = -1;
   }
 
-
+  auto start = std::chrono::steady_clock::now();
   for (auto it = nums.begin(); it != nums.begin() + half - 1; ++it) {
     auto minimum = it;
     for (auto jt = it + 1; jt != nums.begin() + half; ++jt) {
