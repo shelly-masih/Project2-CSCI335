@@ -1,11 +1,11 @@
 #include <vector>
 #include <iostream>
 #include <chrono>
+#include <iterator>
 
 int halfSelectionSort(std::vector<int> &nums, int &duration) {
   int size = nums.size();
   int median;
-
   int half;
   if (size % 2 == 0) {
     half = size / 2;
@@ -33,7 +33,7 @@ int halfSelectionSort(std::vector<int> &nums, int &duration) {
   }
 
   if (size % 2 == 0) {
-    median = (nums[half - 1] + nums[half]) / 2; // Corrected median calculation
+    median = (nums[half - 1] + nums[half]) / 2;
   } else {
     median = nums[half - 1];
   }
