@@ -1,4 +1,3 @@
-
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -36,12 +35,6 @@ int inPlaceMergeSort(std::vector<int>& nums, int& duration){
   } else { // if vector is odd
     median = nums[size / 2];
   }
-s
+
   return median;
 }
-
-
-
-
-
-
