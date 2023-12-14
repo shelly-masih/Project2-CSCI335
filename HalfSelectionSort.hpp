@@ -34,7 +34,7 @@ int halfSelectionSort(std::vector<int> &nums, int &duration) {
     }
 
     int half = size / 2;
-    median = nums[half - 1];
+    median = nums[half];
 
     auto end = std::chrono::steady_clock::now();
     auto diff = end - start;
