@@ -33,7 +33,7 @@ int halfSelectionSort(std::vector<int> &nums, int &duration) {
   }
 
   if (size % 2 == 0) {
-    median = (nums[half - 1] + nums[half]) / 2;
+    median = std::min(nums[half - 1], nums[half]);
   } else {
     median = nums[half - 1];
   }
