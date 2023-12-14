@@ -4,40 +4,42 @@
 #include <iterator>
 
 int halfSelectionSort(std::vector<int> &nums, int &duration) {
-  int size = nums.size();
-  int median;
-  int half;
-  if (size % 2 == 0) {
-    half = size / 2;
-  } else {
-    half = (size / 2) + 1;
-  }
+    int size = nums.size();
+    int median;
 
-  if (size > 50000) {
-    std::cout << "The input is too big for selection sort" << std::endl;
-    duration = -1;
-  }
-
-  auto start = std::chrono::steady_clock::now();
-  for (auto it = nums.begin(); it != nums.begin() + half - 1; ++it) {
-    auto minimum = it;
-    for (auto jt = it + 1; jt != nums.begin() + half; ++jt) {
-      if (*jt < *minimum) {
-        minimum = jt;
-      }
+    if (size > 50000) {
+        std::cout << "The input is too big for selection sort" << std::endl;
+        duration = -1;
+        return 0;  // or return an appropriate value
     }
 
-    if (minimum != it) {
-      std::iter_swap(it, minimum);
+    auto start = std::chrono::steady_clock::now();
+
+    for (int i = 0; i < size - 1; ++i) {
+        int minIndex = i;
+        for (int j = i + 1; j < size; ++j) {
+            if (nums[j] < nums[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        if (minIndex != i) {
+            std::swap(nums[i], nums[minIndex]);
+        }
+
+        // If we have reached the midpoint, break early to avoid unnecessary sorting
+        if (i == size / 2) {
+            break;
+        }
     }
-  }
 
-  median = nums[half - 1];
+    int half = size / 2;
+    median = nums[half - 1];
 
-  auto end = std::chrono::steady_clock::now();
-  auto diff = end - start;
-  auto diff_sec = std::chrono::duration_cast<std::chrono::milliseconds>(diff);
-  duration = diff_sec.count();
+    auto end = std::chrono::steady_clock::now();
+    auto diff = end - start;
+    auto diff_sec = std::chrono::duration_cast<std::chrono::milliseconds>(diff);
+    duration = diff_sec.count();
 
-  return median;
+    return median;
 }
