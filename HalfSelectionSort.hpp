@@ -32,11 +32,7 @@ int halfSelectionSort(std::vector<int> &nums, int &duration) {
     }
   }
 
-  if (size % 2 == 0) {
-    median = std::min(nums[half - 1], nums[half]);
-  } else {
-    median = nums[half - 1];
-  }
+  median = nums[half - 1];
 
   auto end = std::chrono::steady_clock::now();
   auto diff = end - start;
