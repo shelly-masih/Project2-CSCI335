@@ -37,20 +37,23 @@ std::vector<int>::iterator hoarePartition(std::vector<int> &nums,
   std::vector<int>::iterator pivot = medianOfThree(nums, low, high);
   std::vector<int>::iterator i = low;
   std::vector<int>::iterator j = pivot - 1;
-  while (true) {
+
+  do {
     while (*i < *pivot) {
       ++i;
     }
+
     while (*j > *pivot) {
       --j;
     }
-    if (i >= j) {
-      break;
+
+    if (i < j) {
+      std::iter_swap(i, j);
+      ++i;
+      --j;
     }
-    std::iter_swap(i, j);
-    ++i;
-    --j;
-  }
+  } while (i < j);
+
   std::iter_swap(i, pivot);
   return i;
 }
