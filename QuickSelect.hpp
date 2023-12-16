@@ -70,19 +70,11 @@ void quickSelectHelper(std::vector<int> &nums, std::vector<int>::iterator low,
 int quickSelect(std::vector<int> &nums, int &duration) {
   auto start = std::chrono::high_resolution_clock::now();
 
-  int k;
-
-  if (nums.size() % 2 == 0) {
-    k = (nums.size() / 2) - 1;
-  } else {
-    k = nums.size() / 2;
-  }
-
   // Example: Find the median
 
   std::vector<int>::iterator low = nums.begin();
   std::vector<int>::iterator high = nums.end() - 1;
-  std::vector<int>::iterator mid = std::next(nums.begin(), k);
+  std::vector<int>::iterator mid = nums.begin() + (nums.size() - 1) / 2
 
   quickSelectHelper(nums, low, high, mid);
 
@@ -90,6 +82,6 @@ int quickSelect(std::vector<int> &nums, int &duration) {
                  std::chrono::high_resolution_clock::now() - start)
                  .count();
 
-  return *std::next(nums.begin(), k);
+  return *(nums.begin() + (nums.size() - 1) / 2);
 }
 
