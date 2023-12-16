@@ -1,87 +1,92 @@
 #include <algorithm>
 #include <chrono>
+#include <fstream>
 #include <iostream>
+#include <iterator>
 #include <vector>
 
 std::vector<int>::iterator medianOfThree(std::vector<int> &nums,
                                          std::vector<int>::iterator low,
                                          std::vector<int>::iterator high) {
+  std::vector<int>::iterator left = low;
+  std::vector<int>::iterator right = high;
   std::vector<int>::iterator mid = low + (high - low) / 2;
 
-  if (*mid < *low) {
-    std::iter_swap(mid, low);
-  }
-  if (*high < *low) {
-    std::iter_swap(high, low);
-  }
-  if (*mid < *high) {
-    std::iter_swap(mid, high);
+  if (*mid<*low && * mid> * high) {
+    std::iter_swap(mid, right);
   }
 
-  return high;
+  if (*mid > *low && *mid < *high) {
+    std::iter_swap(mid, right);
+  }
+
+  if (*left<*mid && * left> * high) {
+    std::iter_swap(left, right);
+  }
+
+  if (*left > *mid && *left < *high) {
+    std::iter_swap(left, right);
+  }
+
+  return right;
 }
 
 std::vector<int>::iterator hoarePartition(std::vector<int> &nums,
                                           std::vector<int>::iterator low,
                                           std::vector<int>::iterator high) {
   std::vector<int>::iterator pivot = medianOfThree(nums, low, high);
-  std::vector<int>::iterator i = low - 1;
-  std::vector<int>::iterator j = high + 1;
-
-  do {
-    do {
+  std::vector<int>::iterator i = low;
+  std::vector<int>::iterator j = pivot - 1;
+  while (true) {
+    while (*i < *pivot) {
       ++i;
-    } while (*i < *pivot);
-
-    do {
+    }
+    while (*j > *pivot) {
       --j;
-    } while (*j > *pivot);
-
+    }
     if (i >= j) {
       break;
     }
-
     std::iter_swap(i, j);
     ++i;
     --j;
-  } while (true);
-
+  }
   std::iter_swap(i, pivot);
   return i;
 }
-void quickSelectHelper(std::vector<int> &nums, std::vector<int>::iterator low,
-                       std::vector<int>::iterator high,
-                       std::vector<int>::iterator mid) {
+
+void quickSelectHelperFunction(std::vector<int> &nums,
+                               std::vector<int>::iterator low,
+                               std::vector<int>::iterator high,
+                               std::vector<int>::iterator mid) {
   if (std::distance(low, high) < 10) {
     std::sort(low, high + 1);
     return;
   }
 
-  std::vector<int>::iterator pivotValue = hoarePartition(nums, low, high);
-  if (pivotValue == mid) {
+  std::vector<int>::iterator pivot = hoarePartition(nums, low, high);
+  if (pivot == mid) {
     return;
-  } else if (pivotValue < mid) {
-    quickSelectHelper(nums, pivotValue + 1, high, mid);
-  } else if (pivotValue > mid) {
-    quickSelectHelper(nums, low, pivotValue - 1, mid);
+  } else if (pivot < mid) {
+    quickSelectHelperFunction(nums, pivot + 1, high, mid);
+  } else if (pivot > mid) {
+    quickSelectHelperFunction(nums, low, pivot - 1, mid);
   }
 }
 
 int quickSelect(std::vector<int> &nums, int &duration) {
-  auto start = std::chrono::high_resolution_clock::now();
-
-  // Example: Find the median
+  auto start_time = std::chrono::high_resolution_clock::now();
 
   std::vector<int>::iterator low = nums.begin();
   std::vector<int>::iterator high = nums.end() - 1;
-  std::vector<int>::iterator mid = nums.begin() + (nums.size() - 1) / 2
+  std::vector<int>::iterator mid = nums.begin() + (nums.size() - 1) / 2;
 
-  quickSelectHelper(nums, low, high, mid);
+  quickSelectHelperFunction(nums, low, high, mid);
 
-  duration = std::chrono::duration_cast<std::chrono::microseconds>(
-                 std::chrono::high_resolution_clock::now() - start)
+  auto end_time = std::chrono::high_resolution_clock::now();
+  duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time -
+                                                                   start_time)
                  .count();
 
   return *(nums.begin() + (nums.size() - 1) / 2);
 }
-
