@@ -20,17 +20,3 @@ std::vector<int> worstCaseQuickSelect() {
     return worstCaseVector;
 }
 
-int main() {
-    // Generate worst-case vector
-    std::vector<int> worstCaseVector = worstCaseQuickSelect();
-
-    // Call your QuickSelect function and measure its duration
-    int duration;
-    int result = quickSelect(worstCaseVector, duration);
-
-    // Print the result and duration
-    std::cout << "Result: " << result << std::endl;
-    std::cout << "Duration: " << duration << " milliseconds" << std::endl;
-
-    return 0;
-}
