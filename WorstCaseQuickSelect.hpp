@@ -11,5 +11,6 @@ std::vector<int> worstCaseQuickSelect() {
         vector_size[i] = 20000 - i;
     }
 
+    // return vector
     return vector_size;
 }
