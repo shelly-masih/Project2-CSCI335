@@ -4,13 +4,12 @@
 #include <random>
 
 std::vector<int> worstCaseQuickSelect() {
-    const int size = 20000;
-    std::vector<int> worstCaseVector(size);
+    std::vector<int> vector_size(20000);
 
-    // Generate a sorted vector from 1 to 20000
-    for (int i = 1; i <= size; ++i) {
-        worstCaseVector[i - 1] = i;
+    // vector of size 2000
+    for (int i = 0; i < 20000; ++i) {
+        vector_size[i] = 20000 - i;
     }
 
-    return worstCaseVector;
+    return vector_size;
 }
